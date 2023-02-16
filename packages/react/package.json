@@ -1,0 +1,9 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "a react common library for my cute-react18",
+  "module": "index.ts",
+  "dependencies": {
+    "shared": "workspace:*"
+  }
+}
