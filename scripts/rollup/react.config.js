@@ -8,6 +8,7 @@ const pkgPath = resolvePkgPath(name);
 // react.build.js
 const buildPath = resolvePkgPath(name, true);
 
+console.log("name",  pkgPath, buildPath, name, module);
 console.log('pkgPath', pkgPath);
 console.log('buildPath', buildPath);
 
@@ -16,10 +17,10 @@ export default [
     input: `${pkgPath}/${module}`,
     output: {
       file: `${buildPath}/index.js`,
-      name: 'index.umd.js',
+      name: 'index.js',
       format: 'umd'
     },
-    plugin: getBasePlugins({})
+    plugins: getBasePlugins()
   },
   {
     input: `${pkgPath}/src/jsx.ts`,
@@ -37,6 +38,6 @@ export default [
         format: 'umd'
       }
     ],
-    plugin: getBasePlugins({})
+    plugins: getBasePlugins({})
   }
 ];
