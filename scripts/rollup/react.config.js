@@ -19,7 +19,7 @@ export default [
       name: 'index.umd.js',
       format: 'umd'
     },
-    plugin: getBasePlugins({})
+    plugins: getBasePlugins({})
   },
   {
     input: `${pkgPath}/src/jsx.ts`,
@@ -37,6 +37,6 @@ export default [
         format: 'umd'
       }
     ],
-    plugin: getBasePlugins({})
+    plugins: getBasePlugins({})
   }
 ];
