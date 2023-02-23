@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import typescript2 from 'rollup-plugin-typescript2';
 import cjs from '@rollup/plugin-commonjs';
+import rollupPkgJson from 'rollup-plugin-generate-package-json';
 
 // packages path
 const pkgPath = path.resolve(__dirname, '../../packages');
@@ -23,6 +24,19 @@ export function getPackageJson(pkgName) {
   return JSON.parse(pkgJsonStr);
 }
 
-export function getBasePlugins({ typescript = {} } = {}) {
-  return [cjs(), typescript2(typescript)];
+export function getBasePlugins({ typescript = {}, generatePkgOption = {} } = {}) {
+  if (generatePkgOption.switch) {
+    return [
+      cjs(),
+      typescript2(typescript),
+      rollupPkgJson({
+        main: 'index.js',
+        inputFolder: generatePkgOption.inputFolder,
+        outputFolder: generatePkgOption.outputFolder,
+        baseContents: ({ name, version, description }) => ({ name, version, description })
+      })
+    ];
+  }
+
+  return [cjs(), typescript2(typescript)]
 }

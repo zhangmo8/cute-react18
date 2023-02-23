@@ -8,10 +8,6 @@ const pkgPath = resolvePkgPath(name);
 // react.build.js
 const buildPath = resolvePkgPath(name, true);
 
-console.log("name",  pkgPath, buildPath, name, module);
-console.log('pkgPath', pkgPath);
-console.log('buildPath', buildPath);
-
 export default [
   {
     input: `${pkgPath}/${module}`,
@@ -20,7 +16,7 @@ export default [
       name: 'index.js',
       format: 'umd'
     },
-    plugins: getBasePlugins()
+    plugins: getBasePlugins({ generatePkgOption: { switch: true, inputFolder: pkgPath, outputFolder: buildPath } })
   },
   {
     input: `${pkgPath}/src/jsx.ts`,
@@ -28,16 +24,16 @@ export default [
       // jsx run time
       {
         file: `${buildPath}/jsx-runtime.js`,
-        name: 'jsx-runtime.umd.js',
+        name: 'jsx-runtime.js',
         format: 'umd'
       },
       // jsx dev run time
       {
         file: `${buildPath}/jsx-dev-runtime.js`,
-        name: 'jsx-dev-runtime.umd.js',
+        name: 'jsx-dev-runtime.js',
         format: 'umd'
       }
     ],
-    plugins: getBasePlugins({})
+    plugins: getBasePlugins()
   }
 ];

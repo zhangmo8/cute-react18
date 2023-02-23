@@ -1,4 +1,4 @@
-// 判定目前宿主环境是否支持Symbol
+// the environment whether support the Symbol
 const supportsSymbol = typeof Symbol === 'function' && Symbol.for;
 
 export const REACT_ELEMENT_TYPE = supportsSymbol
