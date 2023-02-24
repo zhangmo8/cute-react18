@@ -1,4 +1,5 @@
 import { Key, Props, Ref } from "shared/ReactTypes";
+import { Flags, NoFlags } from "./fiberFlags";
 import { WorkTag } from "./workTags";
 
 // 双缓存技术
@@ -22,6 +23,10 @@ export class FiberNode {
   sibling: FiberNode | null;
   child: FiberNode | null;
   index: number;
+
+  // the other fiberTree's 引用
+  alternate: FiberNode | null;
+  flags: Flags;
 
   constructor(tag: WorkTag, pendingProps: Props, key: Key) {
     // component's properties
@@ -47,5 +52,12 @@ export class FiberNode {
     this.child = null;
     // this.component's index for parent fiber node's children
     this.index = 0;
+
+    // this properties mean the other fiberNode's this
+    // if now it's current then this is the workflow fiberNode
+    this.alternate = null;
+
+    // this properties mean some action flag
+    this.flags = NoFlags
   }
 }
